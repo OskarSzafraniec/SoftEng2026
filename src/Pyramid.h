@@ -15,7 +15,7 @@ class Pyramid : public Shape3D<T> {
 public:
     inline ShapeResultData<T> compute();
     inline string print();
-    inline Pyramid(const ShapeParam<T> & param);
+    inline Pyramid(const ShapeParam<T>& param);
 };
 
 template<class T>
@@ -43,11 +43,26 @@ inline ShapeResultData<T> Pyramid<T>::compute() {
 
 template<class T>
 inline string Pyramid<T>::print() {
-    return "";
+    const T width = this->m_param.get(PARAM_WIDTH);
+    const T height = this->m_param.get(PARAM_HEIGHT);
+    const T depth = this->m_param.get(PARAM_DEPTH);
+
+    ShapeResultData<T> result = compute();
+
+    ostringstream out;
+    out << "=== SOLID: PYRAMID ===" << endl;
+    out << "Width: " << width << endl;
+    out << "Height: " << height << endl;
+    out << "Depth: " << depth << endl;
+    out << "Volume: " << result.get(RESULT_VOLUME) << endl;
+    out << "Surface area: " << result.get(RESULT_SURFACE) << endl;
+    out << "=====================";
+
+    return out.str();
 }
 
 template<class T>
-inline Pyramid<T>::Pyramid(const ShapeParam<T> & param) : Shape3D<T>(param) {
+inline Pyramid<T>::Pyramid(const ShapeParam<T>& param) : Shape3D<T>(param) {
 }
 
 #endif
